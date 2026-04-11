@@ -54,6 +54,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto createRestaurantDto)
         {
             var command = new CreateRestaurantCommand
