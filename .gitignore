@@ -1,0 +1,45 @@
+# ------------------------------
+# Ignore build folders
+# ------------------------------
+[Bb]in/
+[Oo]bj/
+
+# ------------------------------
+# Visual Studio / VS Code / Rider
+# ------------------------------
+*.user
+*.suo
+*.cache
+*.log
+.vs/
+.vscode/
+.idea/
+
+# ------------------------------
+# NuGet packages
+# ------------------------------
+*.nupkg
+*.snupkg
+packages/
+
+# ------------------------------
+# Generated / temporary files
+# ------------------------------
+project.assets.json
+*.generated.cs
+*.DS_Store
+
+# ------------------------------
+# Local database, debug files
+# ------------------------------
+*.dbmdl
+*.bak
+*.sqlite
+
+# ------------------------------
+# Rider / JetBrains files
+# ------------------------------
+.idea/
+*.iws
+*.iml
+*.ipr

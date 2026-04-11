@@ -1,0 +1,47 @@
+@API_HostAddress = https://localhost:7270
+@verify_ssl = false
+
+### ----------------------------
+### GET: All Restaurants
+### ----------------------------
+GET {{API_HostAddress}}/api/restaurants
+Accept: application/json
+
+###
+
+### ----------------------------
+### GET: Weather Forecast (Controller with /api)
+### ----------------------------
+GET {{API_HostAddress}}/api/weatherforecast
+Accept: application/json
+
+###
+
+### ----------------------------
+### GET: Weather Forecast (Minimal API without /api)
+### ----------------------------
+GET {{API_HostAddress}}/weatherforecast
+Accept: application/json
+
+###
+
+### ----------------------------
+### POST: Create a New Restaurant
+### ----------------------------
+POST {{API_HostAddress}}/api/restaurants
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Gourmet Bites",
+  "description": "A cozy place offering international cuisine.",
+  "category": "Fine Dining",
+  "hasDelivery": true,
+  "contactEmail": "contact@gourmetbites.com",
+  "contactNumber": "+1-555-123-4567",
+  "city": "New York",
+  "street": "123 Culinary Ave",
+  "postalCode": "10001"
+}
+
+###
