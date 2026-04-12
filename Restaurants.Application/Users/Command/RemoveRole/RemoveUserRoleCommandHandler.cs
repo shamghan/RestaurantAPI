@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Restaurants.Domain.Entities;
 using Restaurants.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurants.Application.Users.Command.UpdateUserDetails
+namespace Restaurants.Application.Users.Command.RemoveRole
 {
-    public class AssignUserRoleCommandHandler(ILogger<AssignUserRoleCommandHandler> logger,
+    public class RemoveUserRoleCommandHandler(
+        ILogger<RemoveUserRoleCommandHandler> logger,
         UserManager<Domain.Entities.User> userManager,
         RoleManager<IdentityRole> roleManager
-        ) : IRequestHandler<AssignUserRoleCommand>
+        ) : IRequestHandler<RemoveUserRoleCommand>
     {
-        public async Task Handle(AssignUserRoleCommand request, CancellationToken cancellationToken)
+        public async Task Handle(RemoveUserRoleCommand request, CancellationToken cancellationToken)
         {
             logger.LogInformation("Assigning user roles: {@Request}", request);
             var dbUser = await userManager.FindByEmailAsync(request.UserEmail)
@@ -24,9 +26,7 @@ namespace Restaurants.Application.Users.Command.UpdateUserDetails
             var dbRole = await roleManager.FindByNameAsync(request.UserRole)
                  ?? throw new NotFoundException(nameof(User), request.UserEmail);
 
-            await userManager.AddToRoleAsync(dbUser, dbRole.Name!);
-            //By writing dbRole.Name!, you’re telling the compiler:
-            //I guarantee dbRole.Name is not null here, so don’t warn me.
+            await userManager.RemoveFromRoleAsync(dbUser, dbRole.Name!);
         }
     }
 }
