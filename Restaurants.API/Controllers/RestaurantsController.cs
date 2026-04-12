@@ -9,6 +9,7 @@ using Restaurants.Application.Restaurants.Commands.UpdateRestuarant;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
+using Restaurants.Domain.Constants;
 using System.Reflection;
 
 namespace Restaurants.API.Controllers
@@ -54,7 +55,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles=UserRoless.Owner)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto createRestaurantDto)
         {
             var command = new CreateRestaurantCommand

@@ -1,4 +1,5 @@
-﻿﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants.Domain.Entities;
@@ -16,7 +17,8 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<RestaurantsDbContext>(options => options.UseSqlServer(connectionString)
         .EnableSensitiveDataLogging()
         );
-        services.AddIdentityApiEndpoints<User>().AddEntityFrameworkStores<RestaurantsDbContext>();
+        services.AddIdentityApiEndpoints<User>().AddRoles<IdentityRole>().
+            AddEntityFrameworkStores<RestaurantsDbContext>();//.AddRoles<IdentityRole>(); allows user role management for authorization. Without it, accessing role-protected resources can trigger a 403 Forbidden error.
         services.AddScoped<IRestaurantsSeeder, RestaurantsSeeder>();
         services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
         services.AddScoped<IDishesRepository, DishesRepository>();
