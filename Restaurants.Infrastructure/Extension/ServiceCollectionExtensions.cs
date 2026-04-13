@@ -24,6 +24,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRestaurantsSeeder, RestaurantsSeeder>();
         services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
         services.AddScoped<IDishesRepository, DishesRepository>();
+        services.AddAuthorizationBuilder()
+            //.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality")); //It checks the Nationality column, and if it has a value, the user is authorized to access the endpoint; if the Nationality column is empty, access to the endpoint is denied.
+            .AddPolicy(PolicyName.HasNationality, builder => builder.RequireClaim(AppClaimTypes.Nationality,"Indian","German"));
 
     }
 }
