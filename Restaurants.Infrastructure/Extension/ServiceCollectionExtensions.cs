@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
 using Restaurants.Infrastructure.Authorization;
+using Restaurants.Infrastructure.Authorization.Requirments;
 using Restaurants.Infrastructure.Persistence;
 using Restaurants.Infrastructure.Repositories;
 using Restaurants.Infrastructure.Seeders;
@@ -26,7 +29,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IDishesRepository, DishesRepository>();
         services.AddAuthorizationBuilder()
             //.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality")); //It checks the Nationality column, and if it has a value, the user is authorized to access the endpoint; if the Nationality column is empty, access to the endpoint is denied.
-            .AddPolicy(PolicyName.HasNationality, builder => builder.RequireClaim(AppClaimTypes.Nationality,"Indian","German"));
+            .AddPolicy(PolicyName.HasNationality, builder => builder.RequireClaim(AppClaimTypes.Nationality, "Indian", "German"))
+            .AddPolicy(PolicyName.AtLeast20, builder => builder.AddRequirements(new MinimumAgeRequirment(20)));
 
+        services.AddScoped<IAuthorizationHandler, MinimumAgeRequirmentHandler>();
     }
 }
