@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Exceptions;
+using Restaurants.Domain.Interfaces;
 using Restaurants.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -16,8 +18,10 @@ namespace Restaurants.Application.Dishes.Commands.DeleteDishes
         ILogger<DeleteDishesForRestaurantCommandHandler> logger,
         IMapper mapper,
         IDishesRepository dishesRepository,
-        IRestaurantsRepository restaurantsRepository
-        
+        IRestaurantsRepository restaurantsRepository,
+        IRestaurantAuthorizationService restaurantAuthorizationService
+
+
         ) : IRequestHandler<DeleteDishesForRestaurantCommand>
     {
      
@@ -26,6 +30,9 @@ namespace Restaurants.Application.Dishes.Commands.DeleteDishes
             logger.LogInformation("Remove all dishes from restaurant: {@RestaurantId}", request.RestaurantId);
             var restaurant = await restaurantsRepository.GetById(request.RestaurantId) ??
                 throw new NotFoundException(nameof(Restaurants), request.RestaurantId.ToString());
+
+            if (!restaurantAuthorizationService.Authorize(restaurant, ResourceOperations.Update))
+                throw new ForbidException();
 
             await dishesRepository.Delete(restaurant.Dishes);
         }
