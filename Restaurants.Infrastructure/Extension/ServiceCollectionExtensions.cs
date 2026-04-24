@@ -32,10 +32,13 @@ public static class ServiceCollectionExtensions
         services.AddAuthorizationBuilder()
             //.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality")); //It checks the Nationality column, and if it has a value, the user is authorized to access the endpoint; if the Nationality column is empty, access to the endpoint is denied.
             .AddPolicy(PolicyName.HasNationality, builder => builder.RequireClaim(AppClaimTypes.Nationality, "Indian", "German"))
-            .AddPolicy(PolicyName.AtLeast20, builder => builder.AddRequirements(new MinimumAgeRequirment(20)));
+            .AddPolicy(PolicyName.AtLeast20, builder => builder.AddRequirements(new MinimumAgeRequirment(20)))
+            .AddPolicy(PolicyName.CreatedAtLeast2Restaurants, builder => builder.AddRequirements(new CreatedMultipleRestaurantsRequirment(2)));
 
         services.AddScoped<IAuthorizationHandler, MinimumAgeRequirmentHandler>();
+        services.AddScoped<IAuthorizationHandler, CreatedMultipleRestaurantsRequirmentHandler>();
+
         services.AddScoped<IRestaurantAuthorizationService, RestaurantAuthorizationService>();
-        
+
     }
 }
