@@ -30,6 +30,15 @@ namespace Restaurants.Infrastructure.Repositories
                 .ToListAsync();
             return restaurants;
         }
+        public async Task<IEnumerable<Restaurant>> GetAllMatchingAsync(string? searchPhrase)
+        {
+            var seachPhraseLower = searchPhrase?.ToLower();
+            var restaurants = await dbContext.Restaurants
+                .Where(r => seachPhraseLower == null || ( r.Name.ToLower().Contains(seachPhraseLower)
+                         || r.Description.ToLower().Contains(seachPhraseLower)))
+                .ToListAsync();
+            return restaurants;
+        }
 
         public async Task<Restaurant?> GetById(int id)
         {
