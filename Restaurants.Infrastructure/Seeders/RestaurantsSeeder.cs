@@ -34,9 +34,9 @@ namespace Restaurants.Infrastructure.Seeders
         {
             List<IdentityRole> roless =
                 [
-                new  (UserRoless.user)
+                new  (UserRoless.User)
                 {
-                    NormalizedName= UserRoless.user.ToUpper()
+                    NormalizedName= UserRoless.User.ToUpper()
                 },
                 new  (UserRoless.Admin)
                 {
