@@ -8,6 +8,7 @@ namespace Restaurants.Application.Restaurants.Dtos
 {
     public class CreateRestaurantDto
     {
+        public int Id { get; set; } = default!;
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public string Category { get; set; } = default!;

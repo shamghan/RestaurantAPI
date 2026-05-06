@@ -23,8 +23,9 @@ namespace Restaurants.Application.Restaurants.Command.CreateRestaurant
             logger.LogInformation("{UserName} [{UserId}] a new restaurant {@Restaurant}", currentUser.Email, currentUser.Id, request);
             var restaurant = mapper.Map<Restaurant>(request.RestaurantDto);
             restaurant.OwnerId = currentUser.Id;
-            await restaurantsRepository.Create(restaurant);
-            return restaurant.Id;
+            var createdId = await restaurantsRepository.Create(restaurant);
+            restaurant.Id = createdId;
+            return createdId;
         }
     }
 }
