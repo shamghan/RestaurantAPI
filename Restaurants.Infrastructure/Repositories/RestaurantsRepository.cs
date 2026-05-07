@@ -70,5 +70,7 @@ namespace Restaurants.Infrastructure.Repositories
 
         public async Task Update(Restaurant entity)
         =>  await dbContext.SaveChangesAsync();
+        public async Task SaveChanges()
+                => await dbContext.SaveChangesAsync();
     }
 }

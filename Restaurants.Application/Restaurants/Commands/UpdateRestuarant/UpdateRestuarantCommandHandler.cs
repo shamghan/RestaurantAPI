@@ -32,7 +32,7 @@ namespace Restaurants.Application.Restaurants.Commands.UpdateRestuarant
             //restuarant.Name = request.Name;
             //restuarant.Description = request.Description;
             //restuarant.HasDelivery = request.HasDelivery;
-            await restaurantsRepository.Update(restuarant);
+            await restaurantsRepository.SaveChanges();
         }
     }
 }
