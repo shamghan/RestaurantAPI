@@ -47,4 +47,4 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+public partial class Program { }//by default program.cs class is internal, so make this public class
