@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Tests/">
+    <Project Path="../Restaurants.API.Tests/Restaurants.API.Tests.csproj" Id="cf49fa06-68e4-48ff-ac6b-b2c265a3a331" />
     <Project Path="../Restaurants.Applications.Tets/Restaurants.Applications.Tests.csproj" Id="34b2d07c-f5db-49e8-982c-342c67e21860" />
     <Project Path="../Restaurants.Infrastructure.Tests1/Restaurants.Infrastructure.Tests.csproj" Id="c254734d-701c-4d7f-8a63-e2d4e364acb6" />
   </Folder>
