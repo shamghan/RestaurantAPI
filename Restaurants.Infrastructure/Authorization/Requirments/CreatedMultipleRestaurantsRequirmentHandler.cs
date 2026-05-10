@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Restaurants.Infrastructure.Authorization.Requirments
 {
-    public class CreatedMultipleRestaurantsRequirmentHandler(IRestaurantsRepository restaurantsRepository,
+    internal class CreatedMultipleRestaurantsRequirmentHandler(IRestaurantsRepository restaurantsRepository,
         IUserContext userContext) : AuthorizationHandler<CreatedMultipleRestaurantsRequirment>
     {
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, CreatedMultipleRestaurantsRequirment requirement)

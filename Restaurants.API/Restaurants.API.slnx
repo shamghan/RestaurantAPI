@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Tests/">
+    <Project Path="../Restaurants.API.Tests/Restaurants.API.Tests.csproj" Id="cf49fa06-68e4-48ff-ac6b-b2c265a3a331" />
+    <Project Path="../Restaurants.Applications.Tets/Restaurants.Applications.Tests.csproj" Id="34b2d07c-f5db-49e8-982c-342c67e21860" />
+    <Project Path="../Restaurants.Infrastructure.Tests1/Restaurants.Infrastructure.Tests.csproj" Id="c254734d-701c-4d7f-8a63-e2d4e364acb6" />
+  </Folder>
   <Project Path="../Restaurants.Application/Restaurants.Application.csproj" Id="5cd1137a-b26a-4d97-8dda-4f896370f16c" />
   <Project Path="../Restaurants.Domain/Restaurants.Domain.csproj" Id="6402c100-aea3-48a4-84f6-e8db7f05373a" />
   <Project Path="../Restaurants.Infrastructure/Restaurants.Infrastructure.csproj" Id="75c7cc16-854f-40e7-91f4-74046d01d1e1" />

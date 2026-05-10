@@ -8,7 +8,7 @@ namespace Restaurants.Domain.Constants
 {
     public static class UserRoless
     {
-        public const string user = "User";
+        public const string User = "User";
         public const string Admin = "Admin";
         public const string Owner = "Owner";
     }
