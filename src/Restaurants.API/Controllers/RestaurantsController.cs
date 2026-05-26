@@ -77,7 +77,8 @@ namespace Restaurants.API.Controllers
            var command = new UploadRestaurantLogoCommand
             {
                 RestaurantId = id,
-                FileName = file.FileName,
+                FileName = $"{id}-{file.FileName}",
+                File = stream
            };
             await mediator.Send(command);
             return NoContent();
