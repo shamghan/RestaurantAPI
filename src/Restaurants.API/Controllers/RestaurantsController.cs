@@ -6,6 +6,7 @@ using Restaurants.Application.Restaurants;
 using Restaurants.Application.Restaurants.Command.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
 using Restaurants.Application.Restaurants.Commands.UpdateRestuarant;
+using Restaurants.Application.Restaurants.Commands.UploadRestaurantLogo;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
@@ -30,7 +31,7 @@ namespace Restaurants.API.Controllers
         [HttpGet]
         [Route("{id}")]
         [Authorize(Policy = PolicyName.HasNationality)]
-        public async Task<ActionResult<RestaurantsDto>>  GetById([FromRoute]int id)
+        public async Task<ActionResult<RestaurantsDto>> GetById([FromRoute] int id)
         {
             var restaurant = await mediator.Send(new GetRestaurantByIdQuery(id));
             return Ok(restaurant);
@@ -57,7 +58,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles=UserRoless.Owner)]
+        [Authorize(Roles = UserRoless.Owner)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto createRestaurantDto)
         {
             var command = new CreateRestaurantCommand
@@ -65,7 +66,21 @@ namespace Restaurants.API.Controllers
                 RestaurantDto = createRestaurantDto
             };
             int id = await mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new {id}, null);
+            return CreatedAtAction(nameof(GetById), new { id }, null);
+
+        }
+        [HttpPost("{id}/logo")]
+        [Authorize(Roles = UserRoless.Owner)]
+        public async Task<IActionResult> UploadLogo([FromRoute]int id, IFormFile file)
+        {
+            using var stream=file.OpenReadStream();
+           var command = new UploadRestaurantLogoCommand
+            {
+                RestaurantId = id,
+                FileName = file.FileName,
+           };
+            await mediator.Send(command);
+            return NoContent();
 
         }
     }
