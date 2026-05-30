@@ -64,7 +64,7 @@ namespace Restaurants.Applications.Tets.Restaurants.Commands.CreateRastaurant
         [InlineData("Italian")]
         [InlineData("American")]
         [InlineData("Indian")]
-        [InlineData("Japan")]
+        [InlineData("Japanese")]
         public void Validator_ForCategory_ShouldNotHaveValidationErrorsForCategoryProperty(string category)
         {
             //arrange
@@ -86,10 +86,10 @@ namespace Restaurants.Applications.Tets.Restaurants.Commands.CreateRastaurant
             
         }
         [Theory()]
-        [InlineData("1252")]
-        [InlineData("10-54454")]
+      
+        [InlineData("10-544")]
         [InlineData("52-488")]
-        [InlineData("52-5 78")]
+        [InlineData("52-578")]
         public void Validator_ForPostalCode_ShouldNotHaveValidationErrorsForPostalCodeProperty(string postalCode)
         {
             //arrange

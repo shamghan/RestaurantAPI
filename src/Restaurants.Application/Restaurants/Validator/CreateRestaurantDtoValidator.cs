@@ -10,7 +10,7 @@ namespace Restaurants.Application.Restaurants.Validator;
 
 public class CreateRestaurantDtoValidator : AbstractValidator<CreateRestaurantDto>
 {
-    private readonly List<string> validCategories = ["Italian", "American", "Indian"];
+    private readonly List<string> validCategories = ["Italian", "American", "Indian", "Japanese"];
     public CreateRestaurantDtoValidator()
     {
         RuleFor(dto => dto.Name)
@@ -21,7 +21,7 @@ public class CreateRestaurantDtoValidator : AbstractValidator<CreateRestaurantDt
             .WithMessage("Description is required.");
 
         RuleFor(dto => dto.Category)
-            .Must(validCategories.Contains)
+            .Must(category => validCategories.Contains(category, StringComparer.OrdinalIgnoreCase))
             .WithMessage("Invalid category. Please choose from the valid categories.");
 
         RuleFor(dto => dto.ContactEmail)
