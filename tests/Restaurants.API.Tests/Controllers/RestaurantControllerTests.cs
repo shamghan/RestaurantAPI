@@ -7,6 +7,7 @@ using Moq;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
+using Restaurants.Infrastructure.Seeders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Restaurants.API.Tests.Controllers
     public class RestaurantControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly Mock<IRestaurantsRepository> _restaurantsRepositoryMock = new();
+        private readonly Mock<IRestaurantsSeeder> _restaurantsSeederMock = new();
         private readonly WebApplicationFactory<Program> _factory;
 
         // Constructor where we can use the injected factory parameter
@@ -36,6 +38,10 @@ namespace Restaurants.API.Tests.Controllers
                     services.Replace(ServiceDescriptor.Scoped(
                         typeof(IRestaurantsRepository),
                         _ => _restaurantsRepositoryMock.Object));
+
+                    services.Replace(ServiceDescriptor.Scoped(
+                        typeof(IRestaurantsSeeder),
+                        _ => _restaurantsSeederMock.Object));
                 });
             });
         }
