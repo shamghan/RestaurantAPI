@@ -22,7 +22,7 @@ namespace Restaurants.API.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        //k[Authorize(Policy = PolicyName.CreatedAtLeast2Restaurants)]
+        //[Authorize(Policy = PolicyName.CreatedAtLeast2Restaurants)]
         public async Task<ActionResult<IEnumerable<RestaurantsDto>>> GetAll([FromQuery] GetAllRestaurantQuery query)
         {
             var restaurant = await mediator.Send(query);
@@ -71,15 +71,15 @@ namespace Restaurants.API.Controllers
         }
         [HttpPost("{id}/logo")]
         [Authorize(Roles = UserRoless.Owner)]
-        public async Task<IActionResult> UploadLogo([FromRoute]int id, IFormFile file)
+        public async Task<IActionResult> UploadLogo([FromRoute] int id, IFormFile file)
         {
-            using var stream=file.OpenReadStream();
-           var command = new UploadRestaurantLogoCommand
+            using var stream = file.OpenReadStream();
+            var command = new UploadRestaurantLogoCommand
             {
                 RestaurantId = id,
                 FileName = $"{id}-{file.FileName}",
                 File = stream
-           };
+            };
             await mediator.Send(command);
             return NoContent();
 
