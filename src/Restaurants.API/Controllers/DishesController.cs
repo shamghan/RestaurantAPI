@@ -17,7 +17,6 @@ namespace Restaurants.API.Controllers
     [Authorize]
     public class DishesController(IMediator mediator) : ControllerBase
     {
-        
         [HttpGet]
         [Authorize(Policy = PolicyName.AtLeast20)]
         public async Task<ActionResult<IEnumerable<DishDto>>> GetAllForRestaurant([FromRoute] int restaurantId)
